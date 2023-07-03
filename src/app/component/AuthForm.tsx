@@ -3,6 +3,9 @@
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
@@ -30,9 +33,22 @@ const AuthForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = data => {
     setIsLoading(true);
-    variant === "LOGIN" ? console.log("login") : console.log("REGISTER");
+
+    if (variant === "REGISTER") {
+      axios
+        .post("/api/register", data)
+        .catch(() => toast.error("Something went wrong!"))
+        .finally(() => setIsLoading(false));
+    } else {
+      signIn("credentials", { ...data, redirect: false })
+        .then(callback => {
+          if (callback?.error) toast.error("Invalid credentials!");
+          else if (callback?.ok) toast.success("Logged in!");
+        })
+        .finally(() => setIsLoading(false));
+    }
   };
 
   const socialAction = (action: string) => {
@@ -44,8 +60,14 @@ const AuthForm = () => {
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-neutral-950  px-4 py-8 shadow-lg  sm:px-10">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          {isRegister && (  
-            <Input id="name" label="Name" register={register} errors={errors} disabled={isLoading}/>
+          {isRegister && (
+            <Input
+              id="name"
+              label="Name"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+            />
           )}
           <Input
             id="email"
@@ -96,7 +118,9 @@ const AuthForm = () => {
           <div>
             {isRegister ? "New to Messenger" : "Already have an account?"}
           </div>
-          <div onClick={toggleVariant} className="cursor-pointer underline hover:text-fuchsia-900">
+          <div
+            onClick={toggleVariant}
+            className="cursor-pointer underline hover:text-fuchsia-900">
             {isRegister ? "Login" : "Create an account"}
           </div>
         </div>
