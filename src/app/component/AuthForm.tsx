@@ -48,13 +48,17 @@ const AuthForm = () => {
     if (variant === "REGISTER") {
       axios
         .post("/api/register", data)
+        .then(() => signIn("credentials", data))
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => setIsLoading(false));
     } else {
       signIn("credentials", { ...data, redirect: false })
         .then(callback => {
           if (callback?.error) toast.error("Invalid credentials!");
-          else if (callback?.ok) toast.success("Logged in!");
+          else if (callback?.ok) {
+            toast.success("Logged in!");
+            router.push("/users");
+          }
         })
         .finally(() => setIsLoading(false));
     }
@@ -65,7 +69,10 @@ const AuthForm = () => {
     signIn(action, { redirect: false })
       .then(callback => {
         if (callback?.error) toast.error("Invalid credentials!");
-        else if (callback?.ok) toast.success("Logged in!");
+        else if (callback?.ok) {
+          toast.success("Logged in!");
+          router.push("/users");
+        }
       })
       .finally(() => setIsLoading(false));
   };
