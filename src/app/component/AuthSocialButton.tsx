@@ -13,8 +13,7 @@ const AuthSocialButton = ({
     <button
       type="button"
       onClick={onClick}
-      className=" flex w-full items-center justify-center  px-4 py-2 text-neutral-100 shadow-md ring-1 ring-inset ring-neutral-100  hover:text-fuchsia-900 hover:ring-fuchsia-900 focus:ring-fuchsia-900 "
-    >
+      className=" flex w-full items-center justify-center  px-4 py-2 text-neutral-100 shadow-md ring-1 ring-inset ring-neutral-100  hover:text-fuchsia-900 hover:ring-fuchsia-900 focus:text-fuchsia-900 focus:ring-fuchsia-900 ">
       <Icon />
     </button>
   );

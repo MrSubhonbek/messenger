@@ -11,12 +11,10 @@ export const ToasterContext = () => {
       containerClassName=""
       containerStyle={{}}
       toastOptions={{
-        // Define default options
-        className: "",
         duration: 5000,
         style: {
           background: "rgb(10, 10, 10)",
-          color: "#fff",
+          color: "rgb(245, 245, 245)",
         },
       }}
     />
