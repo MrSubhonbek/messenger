@@ -47,7 +47,6 @@ const ConversationBox = ({
     if (lastMessage?.body) return lastMessage.body;
     return "Started a conversation";
   }, [lastMessage]);
-  console.log(otherUser, "===========================");
 
   return (
     <div
@@ -60,15 +59,22 @@ const ConversationBox = ({
       <div className="min-w-0 flex-1 hover:text-fuchsia-900">
         <div className="focus:outline-none">
           <div className="mb-1 flex items-center justify-between ">
-            <p className="text-md font-medium text-neutral-100">
+            <p className="text-md font-medium  ">
               {data.name || otherUser.name}
             </p>
             {lastMessage?.createdAt && (
-              <p className="text-sx font-light">
+              <p className="text-xs font-light">
                 {format(new Date(lastMessage.createdAt), "p")}
               </p>
             )}
           </div>
+          <p
+            className={clsx(
+              "truncate text-sm"
+              /*hasSeen ? "text-fuchsia-900" : "text-neutral-100"*/
+            )}>
+            {lastMessageText}
+          </p>
         </div>
       </div>
     </div>
