@@ -7,7 +7,13 @@ const Avatar = ({ user }: { user: User }) => {
     <div className="relative">
       <div className="relative inline-block h-9 w-9 ">
         {user?.image ? (
-          <Image alt="avatar" src={user.image} width={36} height={36} />
+          <Image
+            alt="avatar"
+            className="h-9 w-9"
+            src={user.image}
+            width={36}
+            height={36}
+          />
         ) : (
           <HiOutlineUserCircle className="h-9 w-9 " />
         )}

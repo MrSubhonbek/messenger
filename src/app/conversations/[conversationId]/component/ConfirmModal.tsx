@@ -15,6 +15,7 @@ type TypeConfirmModalProps = {
   isOpen?: boolean;
   onClose: () => void;
 };
+
 const ConfirmModal = ({ onClose, isOpen }: TypeConfirmModalProps) => {
   const router = useRouter();
   const { conversationId } = useConversation();
@@ -23,10 +24,10 @@ const ConfirmModal = ({ onClose, isOpen }: TypeConfirmModalProps) => {
   const onDelete = useCallback(() => {
     setIsLoading(true);
     axios
-      .delete(`api/conversations/${conversationId}`)
+      .delete(`/api/conversations/${conversationId}`)
       .then(() => {
         onClose();
-        router.push("/conversations");
+        router.push("/users");
         router.refresh();
       })
       .catch(() => toast("Something went wrong!"))

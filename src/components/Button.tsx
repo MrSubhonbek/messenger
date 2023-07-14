@@ -30,14 +30,15 @@ const Button: FC<PropsWithChildren<TypeButtonProps>> = ({
         "flex justify-center px-3 py-3 text-sm font-semibold focus:outline-1 focus:outline-offset-1 focus-visible:outline",
         disable && "cursor-default opacity-50",
         fullWidth && "w-full",
-        secondary ? "text-neutral-900" : "text-neutral-100",
+        secondary
+          ? "bg-neutral-100 text-neutral-900 hover:border-fuchsia-900 hover:text-fuchsia-900"
+          : "text-neutral-100",
         danger &&
           "focus-visible:outline-rouse-600 bg-rose-500 hover:bg-rose-600",
         !secondary &&
           !danger &&
-          "bg-neutral-900  hover:text-fuchsia-900 focus-visible:outline-fuchsia-900 border border-neutral-900 hover:border-fuchsia-900"
-      )}
-    >
+          "border  border-neutral-900 bg-neutral-900 hover:border-fuchsia-900 hover:text-fuchsia-900 focus-visible:outline-fuchsia-900"
+      )}>
       {children}
     </button>
   );
