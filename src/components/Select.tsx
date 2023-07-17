@@ -33,6 +33,18 @@ const Select = ({
           options={options}
           menuPortalTarget={document.body}
           styles={{
+            multiValueLabel: (styles, { data }) => ({
+              ...styles,
+              color: "rgb(245 245 245)",
+            }),
+            multiValueRemove: (styles, { data }) => ({
+              ...styles,
+              color: data.color,
+              ":hover": {
+                backgroundColor: "rgb()",
+                color: "white",
+              },
+            }),
             menuPortal: base => ({
               ...base,
               zIndex: 9999,
@@ -53,6 +65,8 @@ const Select = ({
               ...theme.colors,
               neutral0: "rgb(23 23 23)",
               primary25: "rgb(23 23 23)",
+              neutral10: "rgb(245 245 245)",
+              dangerLight: "rgb(245 245 245)",
               primary: "rgb(112 26 117)",
             },
           })}
